@@ -4,7 +4,7 @@ view: bigquery_data_access {
       SELECT
         *
       FROM
-        `gcp_billing_export_v1_00DD17_3F5E82_4CEB14`
+        `gcp_logs.cloudaudit_googleapis_com_data_access_*`
       WHERE
         {% condition date_filter %} PARSE_TIMESTAMP('%E4Y%m%d', _TABLE_SUFFIX) {% endcondition %} ;;
   }
