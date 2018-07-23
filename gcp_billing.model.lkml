@@ -4,6 +4,7 @@ include: "*.view.lkml"         # include all views in this project
 include: "billing.dashboard.lookml"  # include all dashboards in this project
 
 explore: gcp_billing_export {
+  group_label: "GCP Logs"
   view_label: "GCP Billing"
   label: "GCP Billing"
 
