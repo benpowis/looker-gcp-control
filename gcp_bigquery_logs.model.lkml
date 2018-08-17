@@ -7,7 +7,7 @@ explore: bigquery_data_access {
   group_label: "GCP Logs"
   view_label: "BigQuery Data Access"
   label: "BigQuery Data Access Logs"
-  hidden: yes
+  hidden: no
 
   always_filter: {
     filters: {
