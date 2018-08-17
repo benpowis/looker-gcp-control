@@ -7,6 +7,7 @@ explore: gcp_billing_export {
   group_label: "GCP Logs"
   view_label: "GCP Billing"
   label: "GCP Billing"
+  hidden: yes
 
   join: gcp_billing_export_project {
     view_label: "GCP Billing"
