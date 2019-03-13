@@ -4,7 +4,7 @@ view: bigquery_data_access {
       SELECT
         *
       FROM
-        `43786551.cloudaudit_googleapis_com_data_access_*`
+        `ga_uk.cloudaudit_googleapis_com_data_access_*`
       WHERE
         {% condition date_filter %} PARSE_TIMESTAMP('%E4Y%m%d', _TABLE_SUFFIX) {% endcondition %} ;;
   }
