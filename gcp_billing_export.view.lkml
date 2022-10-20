@@ -188,10 +188,16 @@ view: gcp_billing_export {
     sql: ${TABLE}.service ;;
   }
 
+  dimension: sku_id {
+    hidden: yes
+    sql: ${TABLE}.id ;;
+  }
+
   dimension: sku {
     hidden: yes
     sql: ${TABLE}.sku ;;
   }
+
 
   dimension_group: usage_end {
     description: "Time at which the cost associated with a SKU ended"
@@ -347,5 +353,11 @@ view: gcp_billing_export_sku {
     description: "The most granular level of detail"
     type: string
     sql: ${TABLE}.description ;;
+  }
+  dimension: SKU_id {
+    label: "SKU_id"
+    description: "The most granular level of detail"
+    type: string
+    sql: ${TABLE}.id ;;
   }
 }
