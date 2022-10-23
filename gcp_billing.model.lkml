@@ -21,6 +21,12 @@ explore: gcp_billing_export {
     sql: LEFT JOIN UNNEST(gcp_billing_export.labels) AS gcp_billing_export_labels ;;
   }
 
+  join: gcp_billing_export_location {
+    view_label: "GCP Billing"
+    relationship: one_to_many
+    sql: LEFT JOIN UNNEST([gcp_billing_export.location]) AS gcp_billing_export_location ;;
+  }
+
   join: gcp_billing_export_usage {
     view_label: "GCP Billing"
     sql: LEFT JOIN UNNEST([${gcp_billing_export.usage}]) AS gcp_billing_export_usage ;;

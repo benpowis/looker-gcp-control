@@ -349,15 +349,47 @@ view: gcp_billing_export_sku {
   }
 
   dimension: description {
+    group_label: "SKU"
     label: "SKU"
     description: "The most granular level of detail"
     type: string
     sql: ${TABLE}.description ;;
   }
   dimension: SKU_id {
-    label: "SKU_id"
+    group_label: "SKU"
+    label: "SKU ID"
     description: "The most granular level of detail"
     type: string
     sql: ${TABLE}.id ;;
+  }
+
+}
+
+view: gcp_billing_export_location {
+  dimension: location {
+    group_label: "Location"
+    description: "test"
+    type: string
+    sql: ${TABLE}.location ;;
+  }
+
+  dimension: country {
+    group_label: "Location"
+    label: "country"
+    description: "country"
+    type: string
+    sql: ${TABLE}.country ;;
+  }
+  dimension: region {
+    group_label: "Location"
+    label: "region"
+    description: "region"
+    sql: ${TABLE}.region ;;
+  }
+  dimension: zone {
+    group_label: "Location"
+    label: "zone"
+    description: "zone"
+    sql: ${TABLE}.zone ;;
   }
 }
