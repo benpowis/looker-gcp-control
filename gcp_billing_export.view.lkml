@@ -76,7 +76,7 @@ view: gcp_billing_export {
 
   measure: total_cost_USD {
     label: "Total Cost (USD)"
-    description: "The total cost (dollars) associated to the SKU, between the Start Date and End Date"
+    description: "The total cost (USD) associated to the SKU, between the Start Date and End Date"
     type: sum
     sql: ${TABLE}.cost*${TABLE}.currency_conversion_rate ;;
     value_format_name: usd
@@ -103,6 +103,15 @@ view: gcp_billing_export {
             <a href="{{ link }}"> {{ rendered_value }} {{ currency._value }}</a>
           {% endif %} ;;
     drill_fields: [gcp_billing_export_credits.credit_name,gcp_billing_export_credits.credit_amount]
+  }
+
+  measure: total_credit_USD {
+    label: "Total Credit (USD)"
+    description: "The total cost (USD) associated to the SKU, between the Start Date and End Date"
+    type: sum
+    sql: ${gcp_billing_export_credits.credit_amount}*${TABLE}.currency_conversion_rate ;;
+    value_format_name: usd
+    drill_fields: [gcp_billing_export_project.name, gcp_billing_export_service.description, sku_category, gcp_billing_export_sku.description, gcp_billing_export_usage.unit, gcp_billing_export_usage.total_usage, total_cost]
   }
 
   dimension: currency {
@@ -282,6 +291,13 @@ view: gcp_billing_export_credits {
 }
 
 view: gcp_billing_export_usage {
+
+  dimension: usage_primary_key {
+    hidden: yes
+    primary_key: yes
+    sql: CONCAT(CAST(${gcp_billing_export.pk} as STRING), ${usage}, ${unit}) ;;
+  }
+
   dimension: usage {
     group_label: "Resource Usage"
     type: number
