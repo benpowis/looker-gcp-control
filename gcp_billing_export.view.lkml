@@ -5,7 +5,8 @@ view: gcp_billing_export {
         *,
         ROW_NUMBER() OVER () pk
       FROM
-        gcp_billing_export_v1_0173AC_AD807D_8EF60D
+        `gcp_billing_export_v1_*`
+        -- `gcp_billing_export_v1_0173AC_AD807D_8EF60D`
         -- gcp_billing_export_v1_0002D9_5D0DE0_B33824
       WHERE
         {% condition date_filter %} _PARTITIONTIME {% endcondition %} ;;
@@ -70,6 +71,15 @@ view: gcp_billing_export {
           {% else %}
             <a href="{{ link }}"> {{ rendered_value }} {{ currency._value }}</a>
           {% endif %} ;;
+    drill_fields: [gcp_billing_export_project.name, gcp_billing_export_service.description, sku_category, gcp_billing_export_sku.description, gcp_billing_export_usage.unit, gcp_billing_export_usage.total_usage, total_cost]
+  }
+
+  measure: total_cost_USD {
+    label: "Total Cost (USD)"
+    description: "The total cost (dollars) associated to the SKU, between the Start Date and End Date"
+    type: sum
+    sql: ${TABLE}.cost*${TABLE}.currency_conversion_rate ;;
+    value_format_name: usd
     drill_fields: [gcp_billing_export_project.name, gcp_billing_export_service.description, sku_category, gcp_billing_export_sku.description, gcp_billing_export_usage.unit, gcp_billing_export_usage.total_usage, total_cost]
   }
 
