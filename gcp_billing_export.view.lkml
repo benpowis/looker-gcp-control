@@ -78,7 +78,7 @@ view: gcp_billing_export {
     label: "Total Cost (USD)"
     description: "The total cost (USD) associated to the SKU, between the Start Date and End Date"
     type: sum
-    sql: ${TABLE}.cost*${TABLE}.currency_conversion_rate ;;
+    sql: safe_divide(${TABLE}.cost,${TABLE}.currency_conversion_rate) ;;
     value_format_name: usd
     drill_fields: [gcp_billing_export_project.name, gcp_billing_export_service.description, sku_category, gcp_billing_export_sku.description, gcp_billing_export_usage.unit, gcp_billing_export_usage.total_usage, total_cost]
   }
@@ -109,7 +109,7 @@ view: gcp_billing_export {
     label: "Total Credit (USD)"
     description: "The total cost (USD) associated to the SKU, between the Start Date and End Date"
     type: sum
-    sql: ${gcp_billing_export_credits.credit_amount}*${TABLE}.currency_conversion_rate ;;
+    sql: safe_divide(${gcp_billing_export_credits.credit_amount},${TABLE}.currency_conversion_rate) ;;
     value_format_name: usd
     drill_fields: [gcp_billing_export_project.name, gcp_billing_export_service.description, sku_category, gcp_billing_export_sku.description, gcp_billing_export_usage.unit, gcp_billing_export_usage.total_usage, total_cost]
   }
