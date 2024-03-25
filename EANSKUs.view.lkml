@@ -1,4 +1,4 @@
-view: eanskus {
+view: ean_issues {
     derived_table: {
       sql:
        SELECT *
