@@ -13,8 +13,14 @@ view: table_usage_analysis {
     sql: ${TABLE}.duration_seconds ;;
   }
   dimension: gb_processed {
+    label: "GB Processed"
     type: number
     sql: ${TABLE}.gb_processed ;;
+  }
+  measure: total_gb_processed {
+    label: "Total GB Processed"
+    type: sum
+    sql: ${gb_processed} ;;
   }
   dimension: job_id {
     type: string
