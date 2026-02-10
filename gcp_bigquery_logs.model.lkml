@@ -2,6 +2,11 @@ connection: "mandm_bigquery"
 
 include: "*.view.lkml"         # include all views in this project
 include: "bigquery_audit.dashboard.lookml"  # include all dashboards in this project
+include: "/bigquerytableanalysis/*.view.lkml"
+
+explore: table_usage_analysis {
+  view_label: "Table Usage Analysis"
+}
 
 explore: bigquery_data_access {
   group_label: "GCP Logs"
