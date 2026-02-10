@@ -16,11 +16,13 @@ view: table_usage_analysis {
     label: "GB Processed"
     type: number
     sql: ${TABLE}.gb_processed ;;
+    value_format_name: decimal_2
   }
   measure: total_gb_processed {
     label: "Total GB Processed"
     type: sum
     sql: ${gb_processed} ;;
+    value_format_name: decimal_2
   }
   dimension: job_id {
     type: string
