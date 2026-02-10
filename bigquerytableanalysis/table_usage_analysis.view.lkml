@@ -36,6 +36,16 @@ view: table_usage_analysis {
     type: string
     sql: ${TABLE}.table_id ;;
   }
+  dimension: old_or_new_world {
+    type: string
+    sql:
+        CASE
+          WHEN ${table_id} in ("RolledProductHistory","RolledProduct","DataDump","DataDumpHistory","DataDump_v2","ProductReport","ProductReportHistory","ProductReport_eng") then "Old World"
+          WHEN ${table_id} in ("product_master","product_master_daily") then "New World"
+          ELSE "Neither"
+          END
+    ;;
+  }
   dimension: user_email {
     type: string
     sql: ${TABLE}.user_email ;;
