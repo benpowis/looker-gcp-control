@@ -25,12 +25,26 @@ view: table_usage_analysis {
     value_format_name: decimal_2
   }
   dimension: job_id {
+    hidden: yes
     type: string
     sql: ${TABLE}.job_id ;;
   }
   dimension: query {
     type: string
     sql: ${TABLE}.query ;;
+  }
+  dimension: job_name {
+    type: string
+    label: "Job Name"
+    description: "Extracts the name from -- Job 'Name'"
+    sql: REGEXP_EXTRACT(${query}, r'-- Job \"(.*?)\"') ;;
+  }
+
+  dimension: is_job_tagged {
+    type: yesno
+    label: "Is Job Tagged?"
+    # Returns true if job_name is not null
+    sql: ${job_name} IS NOT NULL ;;
   }
   dimension: table_id {
     type: string
